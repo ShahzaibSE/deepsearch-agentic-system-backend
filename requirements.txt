@@ -1,0 +1,7 @@
+    openai-agents
+    openai
+    python-dotenv
+    faiss-cpu
+    rich
+    asyncio
+    aiohttp

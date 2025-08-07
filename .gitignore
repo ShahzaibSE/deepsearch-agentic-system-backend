@@ -1,0 +1,107 @@
+# Python-generated files
+__pycache__/
+*.py[oc]
+build/
+dist/
+wheels/
+*.egg-info
+
+# Virtual environments
+.venv
+
+# -----------------------
+# Python artifacts
+# -----------------------
+__pycache__/
+*.py[cod]
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+*.log
+
+# -----------------------
+# Virtual Environments
+# -----------------------
+.venv/
+venv/
+env/
+ENV/
+.uv/
+__pypackages__/
+
+# -----------------------
+# Environment variables
+# -----------------------
+.env
+.env.*
+*.env
+*.env.*
+config/secrets/
+config/api_keys/
+
+# -----------------------
+# Editors and IDEs
+# -----------------------
+.vscode/
+.idea/
+*.sublime-workspace
+*.sublime-project
+
+# -----------------------
+# System files
+# -----------------------
+.DS_Store
+Thumbs.db
+*.bak
+*.tmp
+*.swp
+
+# -----------------------
+# Test and Coverage
+# -----------------------
+htmlcov/
+.coverage
+coverage.xml
+.pytest_cache/
+nosetests.xml
+test-results/
+
+# -----------------------
+# Notebooks
+# -----------------------
+.ipynb_checkpoints/
+*.ipynb
+
+# -----------------------
+# Deployment (general)
+# -----------------------
+*.pid
+*.sock
+*.sqlite3
+*.db
+*.log
+logs/
+staticfiles/
+media/
+build/
+output/
+*.pem
+
+# -----------------------
+# Docker (if applicable)
+# -----------------------
+*.tar
+*.log
+docker-compose.override.yml
+
+# -----------------------
+# Node (if frontend present)
+# -----------------------
+node_modules/
+npm-debug.log
+pnpm-lock.yaml
+yarn.lock
+.next/
+out/
