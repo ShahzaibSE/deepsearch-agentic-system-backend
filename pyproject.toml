@@ -11,5 +11,6 @@ dependencies = [
     "faiss-cpu",
     "rich",
     "asyncio",
-    "aiohttp"
+    "aiohttp",
+    "fastapi>=0.116.1",
 ]

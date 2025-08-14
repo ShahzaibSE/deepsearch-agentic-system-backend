@@ -1,4 +1,6 @@
 from abc import ABC, abstractmethod
+from dotenv import load_dotenv
+import os
 
 class BaseModelConfig(ABC):
     
@@ -12,8 +14,7 @@ class BaseModelConfig(ABC):
     @abstractmethod
     def get_api_key(self) -> str:
         pass   
-
-
+    
     @abstractmethod
-    def get_chat_completion(self, messages: list[dict]) -> str:
+    def get_model_config(self) -> dict:
         pass
