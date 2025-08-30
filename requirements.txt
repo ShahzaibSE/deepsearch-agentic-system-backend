@@ -10,3 +10,4 @@ pydantic-settings>=2.2.1
 uvicorn[standard]
 fastapi-limiter>=0.1.6
 pydantic_settings
+pytest

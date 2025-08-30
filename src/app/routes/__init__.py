@@ -19,8 +19,8 @@ def create_main_router():
         try:
             # Get the module name from the file path
             module_name = file_path.stem
-            # Import the module
-            module = importlib.import_module(module_name, package='app.routes')
+            # Import the module using the correct package path
+            module = importlib.import_module(f"app.routes.{module_name}")
             # Get the router from the module
             if hasattr(module, 'router'):
                 router.include_router(module.router)
