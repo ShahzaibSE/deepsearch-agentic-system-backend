@@ -5,7 +5,7 @@ from fastapi import FastAPI
 from app.routes import create_main_router
 from pathlib import Path
 
-set_tracing_disabled(disabled=True)
+set_tracing_disabled(disabled=False)
 
 def main():
     print("Hello from deepsearch!")

@@ -13,5 +13,5 @@ dependencies = [
     "asyncio",
     "aiohttp",
     "fastapi>=0.116.1",
-    "pytest"
+    "pytest",
 ]
