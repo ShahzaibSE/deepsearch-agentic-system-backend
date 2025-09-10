@@ -1,7 +1,7 @@
 from agents import Agent, AsyncOpenAI, ModelSettings, set_tracing_disabled
 from pathlib import Path
 import os
-from config._agents._base_agent import BaseAgentBuilder
+from config._agents.base_agent import BaseAgentBuilder
 
 class WebSearchAgent(BaseAgentBuilder):
     

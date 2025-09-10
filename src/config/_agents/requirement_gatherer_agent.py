@@ -1,7 +1,7 @@
-from base_agent import BaseAgentBuilder
+from config._agents.base_agent import BaseAgentBuilder
 from agents import Agent, AsyncOpenAI, ModelSettings
 
-class OrchestratorAgent(BaseAgentBuilder):
+class RequirementGathererAgent(BaseAgentBuilder):
     _instance = None
     _agent_instance = None
     _initialized = False

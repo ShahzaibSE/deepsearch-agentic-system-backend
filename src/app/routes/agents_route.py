@@ -8,8 +8,8 @@ import asyncio
 from aiohttp import ClientSession
 
 #Agents
-from config._agents._web_search_agent import WebSearchAgent
-from config._agents._base_agent import BaseAgentBuilder
+from config._agents.web_search_agent import WebSearchAgent
+from config._agents.base_agent import BaseAgentBuilder
 from config.security import rate_limit, ip_whitelist
 
 
@@ -19,6 +19,6 @@ router = APIRouter()
 @rate_limit(requests_per_minute=10, requests_ip_whitelist=["127.0.0.1"])
 def web_search(request: Request, response: Response):
 
-    
+
 
     return "Web Search Orchestrator test response"
