@@ -12,3 +12,4 @@ fastapi-limiter>=0.1.6
 pydantic_settings
 pytest
 mem0ai
+PyYAML>=6.0
