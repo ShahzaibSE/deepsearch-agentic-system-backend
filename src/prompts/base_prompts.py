@@ -1,23 +1,50 @@
 # src/prompts/base_prompts.py
-import yaml
+import xml.etree.ElementTree as ET
 from pathlib import Path
 from pydantic import BaseModel
 from typing import Dict, Any, Optional
+from lxml import etree
 
 class PromptTemplateLoader(BaseModel):
-    """Loads and manages YAML prompt templates"""
+    """Loads and manages XML prompt templates with XSD validation"""
     
     templates_dir: Path = Path(__file__).parent / "templates"
+    schema_path: Path = Path(__file__).parent / "schemas" / "prompt_schema.xsd"
+    
+    def validate_template(self, template_path: Path) -> bool:
+        """Validate XML template against XSD schema"""
+        try:
+            schema = etree.XMLSchema(file=str(self.schema_path))
+            parser = etree.XMLParser(resolve_entities=False)
+            xml_doc = etree.parse(str(template_path), parser)
+            schema.assertValid(xml_doc)
+            return True
+        except etree.XMLSyntaxError as e:
+            raise ValueError(f"XML syntax error in template {template_path.name}: {e}")
+        except etree.DocumentInvalid as e:
+            raise ValueError(f"Schema validation failed for template {template_path.name}: {e}")
+        except Exception as e:
+            raise ValueError(f"Template validation error for {template_path.name}: {e}")
     
     def load_template(self, agent_name: str) -> Dict[str, str]:
-        """Load YAML template for a specific agent"""
-        template_path = self.templates_dir / f"{agent_name}.yaml"
+        """Load XML template for a specific agent with validation"""
+        template_path = self.templates_dir / f"{agent_name}.xml"
         
         if not template_path.exists():
             raise FileNotFoundError(f"Template not found: {template_path}")
         
-        with open(template_path, 'r', encoding='utf-8') as file:
-            return yaml.safe_load(file)
+        # Validate template against schema
+        self.validate_template(template_path)
+        
+        # Parse XML template
+        tree = ET.parse(template_path)
+        root = tree.getroot()
+        
+        template_data = {}
+        for child in root:
+            template_data[child.tag] = child.text.strip() if child.text else ""
+        
+        return template_data
     
     def render_template(self, agent_name: str, context: Dict[str, Any]) -> str:
         """Load template and render with context data"""
@@ -68,8 +95,8 @@ class StandardPromptTemplate(BaseModel):
         return "\n".join(prompt_parts)
     
     @classmethod
-    def from_yaml(cls, agent_name: str, context: Dict[str, Any]) -> 'StandardPromptTemplate':
-        """Create template from YAML file with context"""
+    def from_xml(cls, agent_name: str, context: Dict[str, Any]) -> 'StandardPromptTemplate':
+        """Create template from XML file with context"""
         loader = PromptTemplateLoader()
         template_data = loader.load_template(agent_name)
         

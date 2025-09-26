@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           targetNamespace="http://deepsearch.com/prompts"
+           xmlns:prompt="http://deepsearch.com/prompts"
+           elementFormDefault="qualified">
+
+  <!-- Root element for prompt templates -->
+  <xs:element name="prompt_template">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="context" type="prompt:safeTextType" minOccurs="1" maxOccurs="1"/>
+        <xs:element name="task" type="prompt:safeTextType" minOccurs="1" maxOccurs="1"/>
+        <xs:element name="constraints" type="prompt:safeTextType" minOccurs="1" maxOccurs="1"/>
+        <xs:element name="output_format" type="prompt:safeTextType" minOccurs="1" maxOccurs="1"/>
+        <xs:element name="examples" type="prompt:safeTextType" minOccurs="0" maxOccurs="1"/>
+        <xs:element name="tools_available" type="prompt:safeTextType" minOccurs="0" maxOccurs="1"/>
+        <xs:element name="handoff_instructions" type="prompt:safeTextType" minOccurs="0" maxOccurs="1"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <!-- Safe text type with security restrictions -->
+  <xs:simpleType name="safeTextType">
+    <xs:restriction base="xs:string">
+      <xs:minLength value="1"/>
+      <xs:maxLength value="10000"/>
+      <!-- Security: prevent script injection and dangerous characters -->
+      <xs:pattern value="[^&lt;&gt;&amp;]*"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+</xs:schema>
